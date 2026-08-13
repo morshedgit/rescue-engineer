@@ -1,0 +1,82 @@
+---
+const faqs = [
+  {
+    question: 'Will I still be able to use Cursor, Lovable, or Bolt to build features after the rescue?',
+    answer: 'Absolutely. A core goal of our rescue sprint is to structure your codebase into clean, modular files with clear type interfaces and comprehensive schema documentation. We also provide an "AI Prompting & System Guide" so your AI coding assistants can continue building new features without corrupting database policies or auth layers.'
+  },
+  {
+    question: 'How do you handle intellectual property (IP) and security confidentiality?',
+    answer: 'All work is performed under a strict bilateral Non-Disclosure Agreement (NDA). You maintain 100% ownership of all code, architecture, and documentation created. We only request least-privilege GitHub collaborator access and never store or train models on your proprietary logic.'
+  },
+  {
+    question: 'What if my vibe-coded prototype is "too broken" or spaghetti code?',
+    answer: 'In 95% of prototypes, the frontend UI and business flow are solid—the breakage is isolated to authentication, database security policies, asynchronous race conditions, or build pipelines. During the 48-Hour Diagnostic, I give you a transparent assessment. If the codebase is genuinely unfixable, I will tell you directly.'
+  },
+  {
+    question: 'How does the 100% Money-Back Guarantee work?',
+    answer: 'If the 48-Hour Production Readiness Audit does not deliver actionable, high-severity security, architecture, or performance remediation items that protect your application, your audit fee is refunded in full. No hurdles or questions asked.'
+  },
+  {
+    question: 'How quickly can we start, and what is the turnaround time?',
+    answer: 'Code Diagnostics start within 24 hours of booking and are delivered within 48 hours. Rescue Sprints typically start the following Monday and run for 1 to 2 weeks depending on scope.'
+  },
+  {
+    question: 'I am a non-technical founder. Will you explain everything in plain English?',
+    answer: 'Yes! Our entire service is tailored for non-technical founders, solo creators, and operators. Every report and video walkthrough focuses on business risks, customer security, payment reliability, and launch readiness—not abstract academic jargon.'
+  }
+];
+---
+
+<section id="faq" class="py-20 lg:py-28 relative border-t border-slate-800/80 bg-[#070b14]">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center space-y-4 mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold uppercase tracking-wider">
+        Frequently Asked Questions
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+        Everything You Need to Know About <span class="gradient-text-accent">Vibe Code Rescue.</span>
+      </h2>
+      <p class="text-base text-slate-300 leading-relaxed">
+        Have questions before booking your triage? Here are answers to common questions from founders.
+      </p>
+    </div>
+
+    <!-- FAQ Accordion List -->
+    <div class="space-y-4">
+      {faqs.map((faq, index) => (
+        <details class="group glass-panel rounded-2xl border border-slate-800 p-6 transition-all duration-200 [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold text-white text-base sm:text-lg focus:outline-none">
+            <span>{faq.question}</span>
+            <span class="rounded-full bg-slate-800 p-1.5 text-slate-400 group-open:bg-sky-500/20 group-open:text-sky-400 transition-colors shrink-0">
+              <svg class="h-5 w-5 transform transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <p class="mt-4 text-sm text-slate-300 leading-relaxed border-t border-slate-800/80 pt-4">
+            {faq.answer}
+          </p>
+        </details>
+      ))}
+    </div>
+
+    <!-- Direct Contact CTA -->
+    <div class="mt-12 text-center p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+      <h4 class="text-base font-bold text-white">Have a unique scenario or urgent launch blocker?</h4>
+      <p class="text-xs sm:text-sm text-slate-400 mt-1">
+        We can review your architecture live on a screen share today.
+      </p>
+      <div class="mt-4">
+        <a href="#triage" class="inline-flex items-center gap-2 text-sm font-semibold text-sky-400 hover:text-sky-300">
+          <span>Book a Free 15-Min Code Triage</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,77 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Vibe Code Rescue | Turn AI-Built Prototypes into Secure, Scalable Production Software",
+  description = "Hit a wall with Lovable, Bolt, Cursor, or Replit? Senior fractional engineering to resolve security, database, auth, and deployment vulnerabilities in your AI-built apps."
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="vibe coding, cursor fix, lovable rescue, bolt.new security, supabase rls audit, fractional engineer, ai code audit, replit app fix, production ready ai app" />
+    <meta name="author" content="Vibe Code Rescue Engineering" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://rescue-engineer.pages.dev/" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Vibe Code Rescue" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- JSON-LD Structured Data for Service -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Vibe Code Rescue Engineering",
+        "description": "Senior fractional engineering and security audits for AI-generated applications (Cursor, Lovable, Bolt, Replit, v0).",
+        "serviceType": "Software Engineering & Security Audits",
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Production Readiness Audit",
+            "price": "750.00",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "name": "Rescue Sprint",
+            "price": "3500.00",
+            "priceCurrency": "USD"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body class="bg-[#060911] text-slate-100 antialiased selection:bg-sky-500/30 selection:text-white">
+    <div class="relative min-h-screen flex flex-col justify-between">
+      <slot />
+    </div>
+  </body>
+</html>
