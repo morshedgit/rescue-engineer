@@ -1,0 +1,264 @@
+---
+---
+
+<section id="triage" class="py-20 lg:py-28 relative border-t border-slate-800/80 bg-[#060911]">
+  <!-- Background Glow Effect -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-t from-sky-500/10 to-transparent blur-3xl pointer-events-none rounded-full"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+        Fast Track Triage
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+        Book a Free 15-Min <span class="gradient-text-accent">Code Triage Call.</span>
+      </h2>
+      <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
+        Let's look at your repository together, diagnose the root blocker, and determine if an audit or rescue sprint is right for your app.
+      </p>
+    </div>
+
+    <!-- Intake & Booking Container Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-6xl mx-auto">
+      
+      <!-- Left Column: Value Prop & Direct Cal.com Scheduling -->
+      <div class="lg:col-span-6 space-y-6">
+        
+        <!-- Live Calendar Card -->
+        <div class="glass-panel rounded-2xl p-6 sm:p-8 border border-slate-800 space-y-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 font-bold">
+              📅
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white">Direct Calendar Booking</h3>
+              <p class="text-xs text-slate-400">15-minute high-bandwidth technical review</p>
+            </div>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Pick a time that works for you. We'll hop on a quick screen-share, review your current architecture or error logs, and outline immediate next steps.
+          </p>
+
+          <!-- Interactive Cal / Direct Action Button -->
+          <div class="pt-2 space-y-3">
+            <a 
+              href="https://cal.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              id="direct-cal-link"
+              class="w-full inline-flex items-center justify-center px-6 py-3.5 text-sm font-bold text-white rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 transition-all duration-200"
+            >
+              Open Direct Cal.com Scheduler
+              <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+            <p class="text-[11px] text-slate-300 text-center">
+              Prefer async review first? Fill out the intake form on the right.
+            </p>
+          </div>
+
+          <!-- What Happens on Call Checklist -->
+          <div class="pt-4 border-t border-slate-800/80 space-y-2">
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-300">What to expect on the call:</p>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex items-start gap-2">
+                <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Zero sales pressure—pure technical triage and feasibility diagnosis.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Under strict NDA: your proprietary logic and idea remain 100% confidential.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Immediate pricing & turnaround confirmation for your specific codebase.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center justify-between text-xs text-slate-400">
+          <span class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            Booking Slots Open for This Week
+          </span>
+          <span class="font-mono text-slate-300">Avg response: &lt; 4 hrs</span>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Quick Intake Form -->
+      <div class="lg:col-span-6">
+        <div class="glass-panel rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-2xl">
+          <div class="space-y-1 mb-6">
+            <h3 class="text-xl font-bold text-white">Quick Code Intake Form</h3>
+            <p class="text-xs text-slate-400">Provide details about your app and get a personalized diagnostic assessment.</p>
+          </div>
+
+          <form id="intake-form" class="space-y-4">
+            
+            <!-- Name & Email -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="intake-name" class="block text-xs font-semibold text-slate-300 mb-1.5">
+                  Your Name <span class="text-rose-400">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="intake-name" 
+                  name="name" 
+                  required 
+                  placeholder="e.g. Alex Morgan"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
+                />
+              </div>
+
+              <div>
+                <label for="intake-email" class="block text-xs font-semibold text-slate-300 mb-1.5">
+                  Work / Personal Email <span class="text-rose-400">*</span>
+                </label>
+                <input 
+                  type="email" 
+                  id="intake-email" 
+                  name="email" 
+                  required 
+                  placeholder="alex@company.com"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
+                />
+              </div>
+            </div>
+
+            <!-- Repository / Live URL -->
+            <div>
+              <label for="intake-url" class="block text-xs font-semibold text-slate-300 mb-1.5">
+                App URL or GitHub Repo Link <span class="text-slate-500 font-normal">(optional)</span>
+              </label>
+              <input 
+                type="text" 
+                id="intake-url" 
+                name="url" 
+                placeholder="https://github.com/user/app or myapp.com"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
+              />
+            </div>
+
+            <!-- AI Tool & Primary Blocker -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="intake-tool" class="block text-xs font-semibold text-slate-300 mb-1.5">
+                  AI Tool Used <span class="text-rose-400">*</span>
+                </label>
+                <select 
+                  id="intake-tool" 
+                  name="tool" 
+                  required
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
+                >
+                  <option value="Cursor">Cursor AI</option>
+                  <option value="Lovable">Lovable.dev</option>
+                  <option value="Bolt">Bolt.new</option>
+                  <option value="Replit">Replit Agent</option>
+                  <option value="v0">v0 by Vercel</option>
+                  <option value="ClaudeCode">Claude Code</option>
+                  <option value="Other">Other / Mixed</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="intake-blocker" class="block text-xs font-semibold text-slate-300 mb-1.5">
+                  Primary Blocker <span class="text-rose-400">*</span>
+                </label>
+                <select 
+                  id="intake-blocker" 
+                  name="blocker" 
+                  required
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
+                >
+                  <option value="SecurityAuth">Auth & Security / Supabase RLS</option>
+                  <option value="Database">Database Schemas & Data Corruptions</option>
+                  <option value="Deployment">Build & Deployment Failures</option>
+                  <option value="Payments">Stripe & Webhook Errors</option>
+                  <option value="Performance">Sluggish Performance & Logic Bugs</option>
+                  <option value="ContextLimit">AI Context Window Limit Exceeded</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Problem Description -->
+            <div>
+              <label for="intake-message" class="block text-xs font-semibold text-slate-300 mb-1.5">
+                Briefly describe what is breaking or what you need to ship:
+              </label>
+              <textarea 
+                id="intake-message" 
+                name="message" 
+                rows="3" 
+                placeholder="e.g. Supabase auth is not restricting user access, and Vercel build fails with TypeScript errors on stripe webhook."
+                class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors resize-none"
+              ></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button 
+              type="submit" 
+              id="intake-submit-btn"
+              class="w-full inline-flex items-center justify-center px-6 py-3.5 text-sm font-bold text-white rounded-xl bg-gradient-to-r from-sky-500 via-indigo-600 to-sky-500 bg-[length:200%_auto] hover:bg-[position:right_center] shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 transition-all duration-300"
+            >
+              Submit Intake for Rapid Review
+              <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+
+            <!-- Success Feedback -->
+            <div id="form-feedback-success" class="hidden p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm space-y-1">
+              <div class="font-bold flex items-center gap-1.5 text-emerald-200">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+                Intake Request Received!
+              </div>
+              <p>Thank you! I will review your project details and reach out within 4 business hours with an initial diagnostic assessment.</p>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Form submission handler
+  const form = document.getElementById('intake-form') as HTMLFormElement | null;
+  const feedbackSuccess = document.getElementById('form-feedback-success');
+  const submitBtn = document.getElementById('intake-submit-btn') as HTMLButtonElement | null;
+
+  if (form && feedbackSuccess && submitBtn) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Submitting Triage Request...';
+
+      setTimeout(() => {
+        form.reset();
+        submitBtn.classList.add('hidden');
+        feedbackSuccess.classList.remove('hidden');
+      }, 700);
+    });
+  }
+</script>

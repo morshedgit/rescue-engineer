@@ -1,0 +1,139 @@
+---
+const failureModes = [
+  {
+    icon: '🛡️',
+    title: 'Broken Auth & Exposed Data',
+    subtitle: 'Vulnerability #1 in AI apps',
+    description: 'AI tools often write authentication logic directly on the client side or leave PostgreSQL / Supabase Row Level Security (RLS) completely disabled—allowing anyone with DevTools to view your entire user database.',
+    symptoms: [
+      'Database tables open with public read/write access',
+      'Leaked Supabase service_role keys in client bundles',
+      'Admin routes protected only by CSS or front-end redirects',
+      'Missing session expiration and unverified JWTs'
+    ],
+    tag: 'Critical Security Risk'
+  },
+  {
+    icon: '⚡',
+    title: 'Database & State Chaos',
+    subtitle: 'Race conditions & ghost records',
+    description: 'As prompt history builds up, AI forgets foreign key relationships, duplicates schema columns, and introduces unhandled asynchronous state race conditions that corrupt customer records.',
+    symptoms: [
+      'Sluggish queries and un-indexed full table scans',
+      'Foreign key mismatch leading to orphaned customer data',
+      'React state flickering and stale cache bugs',
+      'No database migrations—breaking changes made live'
+    ],
+    tag: 'Data Integrity'
+  },
+  {
+    icon: '💳',
+    title: 'Failed Integrations & Payments',
+    subtitle: 'Lost revenue & broken webhooks',
+    description: 'AI code generates standard "happy path" Stripe and API integrations but misses webhook signature verification, replay protection, retry logic, and API rate-limiting edge cases.',
+    symptoms: [
+      'Stripe payments processed but subscriptions not upgraded',
+      'Duplicate billing due to missing idempotency keys',
+      'Third-party APIs failing silently without error telemetry',
+      'Unhandled rate limits crashing background workers'
+    ],
+    tag: 'Revenue Loss'
+  },
+  {
+    icon: '🚀',
+    title: 'Deployment & Build Hell',
+    subtitle: 'Works locally, fails on Vercel/Cloudflare',
+    description: 'When it is time to push to production, cryptic TypeScript compilation errors, environment variable mismatches, dynamic server rendering conflicts, and broken routing stall your launch for days.',
+    symptoms: [
+      'Vercel or Cloudflare build failing with TS errors',
+      'Environment variables returning undefined in production',
+      'CORS errors blocking API and auth communication',
+      'AI giving circular suggestions that break previous code'
+    ],
+    tag: 'Launch Blocker'
+  }
+];
+---
+
+<section id="the-wall" class="py-20 lg:py-28 relative border-t border-slate-800/80 bg-[#070b14]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold uppercase tracking-wider">
+        The Reality of AI Prototyping
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+        You Hit the <span class="gradient-text-amber">"Vibe Coding Wall"</span>.
+      </h2>
+      <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
+        AI coding assistants are magical for generating initial 80% prototypes. But when you add real users, transactions, and security requirements, AI tools hallucinate, create circular fixes, and compound structural debt.
+      </p>
+    </div>
+
+    <!-- 4 Problem Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+      {failureModes.map((mode, index) => (
+        <div class="glass-panel glass-panel-hover rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group">
+          <!-- Ambient card glow -->
+          <div class="absolute top-0 right-0 w-32 h-32 bg-sky-500/5 rounded-full blur-2xl group-hover:bg-sky-500/10 transition-colors"></div>
+          
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-3xl p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 inline-block">
+                {mode.icon}
+              </span>
+              <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                {mode.tag}
+              </span>
+            </div>
+
+            <div>
+              <span class="text-xs font-mono text-slate-300 font-medium">Failure Mode 0{index + 1} • {mode.subtitle}</span>
+              <h3 class="text-xl font-bold text-white mt-1 group-hover:text-sky-300 transition-colors">
+                {mode.title}
+              </h3>
+            </div>
+
+            <p class="text-sm text-slate-300 leading-relaxed">
+              {mode.description}
+            </p>
+
+            <div class="pt-2 border-t border-slate-800/80">
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Common Signs:</p>
+              <ul class="space-y-1.5">
+                {mode.symptoms.map((symptom) => (
+                  <li class="text-xs text-slate-300 flex items-start gap-2">
+                    <svg class="w-3.5 h-3.5 text-rose-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    <span>{symptom}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Empathy Callout Banner -->
+    <div class="mt-12 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-indigo-500/20 text-center max-w-4xl mx-auto">
+      <h4 class="text-lg sm:text-xl font-bold text-white">
+        Don't throw away your app and start over from scratch.
+      </h4>
+      <p class="text-sm text-slate-300 mt-2 max-w-2xl mx-auto">
+        Your prototype proved the market idea. Instead of burning weeks in frustrating prompt loops, get a senior software engineer to stabilize your existing code in 48 hours.
+      </p>
+      <div class="mt-5">
+        <a href="#triage" class="inline-flex items-center gap-2 text-sm font-semibold text-sky-400 hover:text-sky-300 group">
+          <span>Get a 48-Hour Code Diagnostic Report</span>
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>

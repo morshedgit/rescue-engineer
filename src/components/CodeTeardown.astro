@@ -1,0 +1,299 @@
+---
+const teardowns = [
+  {
+    id: 'teardown-rls',
+    title: '1. Supabase / Postgres RLS Bypass',
+    shortTitle: 'Supabase RLS Data Leak',
+    riskLevel: 'Critical Security Breach',
+    context: 'AI coding tools frequently generate queries that work on localhost using the admin service_role key, or fail to enable PostgreSQL Row Level Security (RLS). This allows any visitor to query the entire database directly.',
+    vibeCode: `-- Flawed AI Schema (Public Read/Write by Default)
+CREATE TABLE customer_orders (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id),
+  total_amount NUMERIC,
+  customer_ssn_or_tax_id TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- RLS is NOT enabled! 
+-- Anyone with the public anon key can run:
+-- SELECT * FROM customer_orders; and steal all customer records.`,
+    rescueCode: `-- Production Hardening: Zero-Trust RLS Policies
+ALTER TABLE customer_orders ENABLE ROW LEVEL SECURITY;
+
+-- 1. Restrict users to ONLY see their own data
+CREATE POLICY "Users can only select own orders"
+  ON customer_orders
+  FOR SELECT
+  TO authenticated
+  USING (auth.uid() = user_id);
+
+-- 2. Prevent arbitrary client-side writes / modifications
+CREATE POLICY "Users can insert own orders"
+  ON customer_orders
+  FOR INSERT
+  TO authenticated
+  WITH CHECK (auth.uid() = user_id);`,
+    fixImpact: 'Closed database breach: 100% of customer orders and sensitive tax IDs are now shielded behind cryptographically signed JWT user claims.'
+  },
+  {
+    id: 'teardown-stripe',
+    title: '2. Stripe Webhook Race Condition',
+    shortTitle: 'Broken Stripe Webhook',
+    riskLevel: 'Lost Revenue & Duplicates',
+    context: 'AI generates standard webhook receivers that parse raw JSON without verifying the cryptographic signature, causing security vulnerabilities and duplicate billing loops during network retries.',
+    vibeCode: `// Flawed AI Webhook Handler
+export async function POST(req: Request) {
+  const body = await req.json();
+  
+  // Vulnerability: No signature verification!
+  // Anyone can POST fake 'checkout.session.completed' events!
+  if (body.type === 'checkout.session.completed') {
+    await db.user.update({
+      where: { id: body.data.object.client_reference_id },
+      data: { isSubscribed: true }
+    });
+  }
+  return Response.json({ received: true });
+}`,
+    rescueCode: `// Production Rescue: Cryptographic Verification + Idempotency
+export async function POST(req: Request) {
+  const payload = await req.text();
+  const sig = req.headers.get('stripe-signature')!;
+  
+  // 1. Verify cryptographic signature from Stripe webhook secret
+  const event = stripe.webhooks.constructEvent(payload, sig, process.env.STRIPE_WEBHOOK_SECRET!);
+  
+  // 2. Transactional Idempotency check to prevent duplicate execution
+  await prisma.$transaction(async (tx) => {
+    const existing = await tx.processedEvent.findUnique({ where: { eventId: event.id } });
+    if (existing) return; // Already processed
+    
+    if (event.type === 'checkout.session.completed') {
+      await handleSubscriptionActivation(tx, event.data.object);
+      await tx.processedEvent.create({ data: { eventId: event.id } });
+    }
+  });
+  
+  return new Response('OK', { status: 200 });
+}`,
+    fixImpact: 'Zero unauthorized activations, immune to replay attacks, and 100% reliable subscription status syncing even across network timeouts.'
+  },
+  {
+    id: 'teardown-secrets',
+    title: '3. Client-Side Leaked API Keys',
+    shortTitle: 'Leaked OpenAI / API Keys',
+    riskLevel: 'Wallet Drain & Key Theft',
+    context: 'AI prototypes commonly prefix OpenAI, Anthropic, or database credentials with NEXT_PUBLIC_ or VITE_, compiling private secrets directly into client browser bundles.',
+    vibeCode: `// Flawed AI Code: Frontend calling AI directly
+import OpenAI from 'openai';
+
+// Critical Bug: NEXT_PUBLIC exposes this key to all visitors in DevTools!
+const openai = new OpenAI({
+  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+  dangerouslyAllowBrowser: true // AI added this to silence the error!
+});
+
+export const generateContent = (prompt: string) => {
+  return openai.chat.completions.create({ ... });
+};`,
+    rescueCode: `// Production Rescue: Server-side Protected Edge Proxy with Rate Limiting
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
+
+// Key is strictly server-side (never prefixed with NEXT_PUBLIC)
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const ratelimit = new Ratelimit({ redis: Redis.fromEnv(), limiter: Ratelimit.slidingWindow(20, '1 m') });
+
+export async function POST(req: Request) {
+  const session = await getServerSession();
+  if (!session) return new Response('Unauthorized', { status: 401 });
+  
+  const { success } = await ratelimit.limit(session.user.id);
+  if (!success) return new Response('Rate limit exceeded', { status: 429 });
+  
+  const stream = await openai.chat.completions.create({ ... });
+  return new Response(stream);
+}`,
+    fixImpact: 'API keys protected on the server, rate-limited per user, preventing malicious bot drains and uncontrolled API bills.'
+  }
+];
+---
+
+<section id="code-teardown" class="py-20 lg:py-28 relative border-t border-slate-800/80 bg-[#070b14]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-14">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+        Senior Architecture Teardown
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+        How Real AI Bugs Get <span class="gradient-text-accent">Engineered & Fixed.</span>
+      </h2>
+      <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
+        Explore interactive examples of real failure modes found in AI-generated apps and the production-grade fixes applied during a rescue sprint.
+      </p>
+    </div>
+
+    <!-- Interactive Teardown Card Container -->
+    <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
+      
+      <!-- Teardown Navigation Tabs -->
+      <div class="flex flex-wrap border-b border-slate-800 bg-slate-900/80 p-2 gap-2" role="tablist">
+        {teardowns.map((td, idx) => (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={idx === 0 ? 'true' : 'false'}
+            aria-controls={td.id}
+            data-target={td.id}
+            class={`teardown-tab-btn flex-1 min-w-[200px] text-left px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center justify-between ${
+              idx === 0 
+                ? 'bg-sky-500/15 text-sky-300 border border-sky-500/30 shadow-inner' 
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+            }`}
+          >
+            <span>{td.shortTitle}</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 font-mono hidden sm:inline-block">
+              {td.riskLevel}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <!-- Tab Content Panels -->
+      <div class="p-6 sm:p-8">
+        {teardowns.map((td, idx) => (
+          <div 
+            id={td.id} 
+            class={`teardown-panel space-y-6 ${idx === 0 ? 'block' : 'hidden'}`}
+            role="tabpanel"
+          >
+            
+            <!-- Context Banner -->
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <h3 class="text-lg font-bold text-white">{td.title}</h3>
+                  <span class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 border border-rose-500/20 font-mono">
+                    {td.riskLevel}
+                  </span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300">{td.context}</p>
+              </div>
+            </div>
+
+            <!-- Code Comparison Side-by-Side Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              
+              <!-- Before: Vibe Code -->
+              <div class="rounded-xl border border-rose-500/30 bg-rose-950/10 overflow-hidden flex flex-col justify-between">
+                <div class="px-4 py-2.5 bg-rose-950/30 border-b border-rose-500/20 flex items-center justify-between">
+                  <span class="text-xs font-mono font-bold text-rose-400 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                    BEFORE: Vulnerable AI Code
+                  </span>
+                  <span class="text-[11px] font-mono text-rose-400/80">Flawed & Dangerous</span>
+                </div>
+                <pre class="p-4 text-xs font-mono text-rose-200 overflow-x-auto leading-relaxed whitespace-pre font-normal bg-[#080c14]/90"><code>{td.vibeCode}</code></pre>
+              </div>
+
+              <!-- After: Production Rescue -->
+              <div class="rounded-xl border border-emerald-500/30 bg-emerald-950/10 overflow-hidden flex flex-col justify-between">
+                <div class="px-4 py-2.5 bg-emerald-950/30 border-b border-emerald-500/20 flex items-center justify-between">
+                  <span class="text-xs font-mono font-bold text-emerald-400 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    AFTER: Hardened Production Architecture
+                  </span>
+                  <span class="text-[11px] font-mono text-emerald-400/80">Tested & Scalable</span>
+                </div>
+                <pre class="p-4 text-xs font-mono text-emerald-200 overflow-x-auto leading-relaxed whitespace-pre font-normal bg-[#080c14]/90"><code>{td.rescueCode}</code></pre>
+              </div>
+
+            </div>
+
+            <!-- Impact Summary -->
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20 flex items-start gap-3">
+              <svg class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div class="text-xs sm:text-sm text-emerald-300">
+                <strong class="font-bold text-emerald-200">Remediation Impact:</strong> {td.fixImpact}
+              </div>
+            </div>
+
+          </div>
+        ))}
+      </div>
+
+    </div>
+
+    <!-- Senior Engineering Credentials & Refund Guarantee Row -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Senior Experience Card -->
+      <div class="glass-panel rounded-2xl p-6 sm:p-8 flex items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center shrink-0">
+          <span class="text-2xl">👨‍💻</span>
+        </div>
+        <div class="space-y-1.5">
+          <h4 class="text-base sm:text-lg font-bold text-white">Principal Engineer Direct</h4>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            10+ years of high-scale cloud architecture, production PostgreSQL, and full-stack TypeScript experience. No junior contractors or outsourced handoffs—every line of your code is reviewed and stabilized by a senior engineer.
+          </p>
+        </div>
+      </div>
+
+      <!-- Money-Back Guarantee Card -->
+      <div class="glass-panel rounded-2xl p-6 sm:p-8 flex items-start gap-4 border-emerald-500/20 bg-emerald-950/10">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
+          <span class="text-2xl">🛡️</span>
+        </div>
+        <div class="space-y-1.5">
+          <h4 class="text-base sm:text-lg font-bold text-white">100% Risk-Free Diagnostic Guarantee</h4>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            If the initial 48-Hour Code Diagnostic fails to identify actionable, high-severity architectural, security, or stability improvements in your codebase, your audit fee is 100% refunded immediately. No questions asked.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Tab switching logic for Code Teardowns
+  const tabBtns = document.querySelectorAll<HTMLButtonElement>('.teardown-tab-btn');
+  const panels = document.querySelectorAll<HTMLElement>('.teardown-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      if (!targetId) return;
+
+      // Update button states
+      tabBtns.forEach(b => {
+        b.setAttribute('aria-selected', 'false');
+        b.classList.remove('bg-sky-500/15', 'text-sky-300', 'border-sky-500/30', 'shadow-inner');
+        b.classList.add('text-slate-400');
+      });
+
+      btn.setAttribute('aria-selected', 'true');
+      btn.classList.add('bg-sky-500/15', 'text-sky-300', 'border-sky-500/30', 'shadow-inner');
+      btn.classList.remove('text-slate-400');
+
+      // Update panel visibility
+      panels.forEach(panel => {
+        if (panel.id === targetId) {
+          panel.classList.remove('hidden');
+          panel.classList.add('block');
+        } else {
+          panel.classList.add('hidden');
+          panel.classList.remove('block');
+        }
+      });
+    });
+  });
+</script>
