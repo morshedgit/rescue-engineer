@@ -1,0 +1,25 @@
+# Environment and credentials
+.env
+.env.local
+*.pem
+*.key
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+env/
+vendor/
+
+# Build artifacts
+dist/
+build/
+out/
+target/
+*.log
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
