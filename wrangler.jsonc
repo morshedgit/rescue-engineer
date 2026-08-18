@@ -1,0 +1,16 @@
+{
+  // Cloudflare Workers deployment config.
+  //
+  // The Workers Builds pipeline runs `npx wrangler versions upload` after
+  // `npm run build`. Without this file wrangler has no entry point and the
+  // deploy fails with "Missing entry-point to Worker script or to assets
+  // directory" — the build itself is fine, only the upload step breaks.
+  //
+  // There is no Worker script: this is a static Astro site, so `assets`
+  // alone is the entry point and no `main` is needed.
+  "name": "rescue-engineer",
+  "compatibility_date": "2026-08-18",
+  "assets": {
+    "directory": "./dist"
+  }
+}
