@@ -1,93 +1,200 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --color-bg: #090d16;
-    --color-surface: #0f172a;
-    --color-surface-hover: #1e293b;
-    --color-border: #1e293b;
-    --color-border-subtle: #334155;
-    --color-primary: #38bdf8;
-    --color-primary-glow: rgba(56, 189, 248, 0.15);
-    --color-accent: #f59e0b;
-    --color-danger: #f43f5e;
-    --color-success: #10b981;
-  }
+/* ==========================================================================
+   Earlydog design system
+   Reference: https://styles.refero.design/style/707a1648-eaef-4629-9c5a-b835cedde250
 
+   Light, flat, editorial. Three rules the whole system rests on:
+     1. No shadows, no gradients. Depth comes from hairline ink borders.
+     2. Sharp 0px corners everywhere — except buttons, which are full pills.
+     3. Signal Blue is the only chromatic accent in UI. The warm hues
+        (ember / saffron / blush) belong to illustration, never to text.
+   ========================================================================== */
+
+@theme {
+  /* --- Palette -------------------------------------------------------- */
+  --color-cream: #fff9f0; /* Cream Paper  — the canvas */
+  --color-ink: #000609; /* Midnight Ink — text, borders, fills */
+  --color-signal: #0a65db; /* Signal Blue  — the one accent */
+  --color-ember: #ee4623; /* Ember Red    — illustration */
+  --color-saffron: #ffd23f; /* Saffron Yellow — illustration */
+  --color-blush: #f4c6c6; /* Blush Pink   — illustration */
+
+  /* --- Typography ------------------------------------------------------
+     Substitutes for the commercial originals:
+       degular-display -> Archivo (width axis carries the wide-set character)
+       usual           -> Instrument Sans
+     Scale: Minor Third (1.2), base 18px.                                  */
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-display: 7.25rem; /* 116px */
+  --text-display--line-height: 1.03;
+  --text-display--letter-spacing: 0.009em;
+
+  --text-hero: 5rem; /* 80px */
+  --text-hero--line-height: 1.1;
+  --text-hero--letter-spacing: 0.013em;
+
+  --text-section: 3.25rem; /* 52px */
+  --text-section--line-height: 1.23;
+  --text-section--letter-spacing: 0.019em;
+
+  --text-sub: 1.875rem; /* 30px */
+  --text-sub--line-height: 1.25;
+
+  --text-lede: 1.375rem; /* 22px */
+  --text-lede--line-height: 1.82;
+
+  --text-body: 1.125rem; /* 18px */
+  --text-body--line-height: 1.78;
+
+  --text-small: 1rem; /* 16px */
+  --text-small--line-height: 1.5;
+
+  /* --- Shape -----------------------------------------------------------
+     The system records exactly one radius: 9999px on buttons. Everything
+     else is square, so there is deliberately no --radius-* scale here.    */
+  --radius-pill: 9999px;
+}
+
+@layer base {
   html {
     scroll-behavior: smooth;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background-color: #060911;
-    color: #f1f5f9;
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
   }
 
   body {
     overflow-x: hidden;
     min-height: 100vh;
-    background-color: #060911;
-    background-image: 
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.12), transparent 70%),
-      radial-gradient(ellipse 60% 40% at 80% 60%, rgba(99, 102, 241, 0.08), transparent 60%),
-      radial-gradient(ellipse 50% 30% at 10% 40%, rgba(245, 158, 11, 0.05), transparent 50%);
+    background-color: var(--color-cream);
+    font-size: var(--text-body);
+    line-height: 1.78;
+  }
+
+  /* Anchor targets clear the 80px sticky header instead of hiding beneath it. */
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+
+  /* Display face runs wide, matching degular-display's set width. */
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 700;
+  }
+
+  code,
+  pre {
+    font-family: var(--font-mono);
   }
 
   ::selection {
-    background-color: rgba(56, 189, 248, 0.3);
-    color: #ffffff;
+    background-color: var(--color-signal);
+    color: var(--color-cream);
   }
 
-  code, pre {
-    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  /* Sharp focus ring in ink — no glow, consistent with the flat system. */
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
   }
 }
 
-/* Custom Utilities */
-.glass-panel {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* ==========================================================================
+   Components
+   ========================================================================== */
+
+/* Outlined Pill Button — "no fill, no shadow: the border IS the button".
+   30px horizontal / 14px vertical padding, 16px bold label.               */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 14px 30px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-ink);
+  background-color: transparent;
+  color: var(--color-ink);
+  font-size: var(--text-small);
+  font-weight: 700;
+  line-height: 1;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.pill:hover {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
 }
 
-.glass-panel-hover {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+/* Solid variant for the single primary action per view. Cream on Signal
+   Blue is 5.15:1 (AA). Ink on Signal Blue is 3.78:1 and must never ship. */
+.pill-signal {
+  border-color: var(--color-signal);
+  background-color: var(--color-signal);
+  color: var(--color-cream);
 }
-.glass-panel-hover:hover {
-  border-color: rgba(56, 189, 248, 0.3);
-  box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.15);
-  transform: translateY(-2px);
-}
-
-.glow-pill {
-  box-shadow: 0 0 20px -3px rgba(56, 189, 248, 0.35);
-}
-
-.badge-alert {
-  background: rgba(244, 63, 94, 0.12);
-  border: 1px solid rgba(244, 63, 94, 0.3);
-  color: #fb7185;
+.pill-signal:hover {
+  background-color: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-cream);
 }
 
-.badge-success {
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  color: #34d399;
+/* Ghost Link with Triangle — plain bold ink text plus a ▸ marker. */
+.ghost-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--text-small);
+  font-weight: 700;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+.ghost-link::after {
+  content: "▸";
+  font-size: 0.85em;
+  line-height: 1;
+}
+.ghost-link:hover {
+  color: var(--color-signal);
 }
 
-.gradient-text-hero {
-  background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Hairline-framed block. Sections flow on the canvas by default; this is
+   for the few places that genuinely need containment (code, forms).      */
+.frame {
+  border: 1px solid var(--color-ink);
+  background-color: var(--color-cream);
 }
 
-.gradient-text-accent {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Bauhaus texture: 8x8 alternating ink/cream squares, sharp 0px edges. */
+.checkerboard {
+  background-image:
+    linear-gradient(45deg, var(--color-ink) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--color-ink) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--color-ink) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--color-ink) 75%);
+  background-size: 16px 16px;
+  background-position:
+    0 0,
+    0 8px,
+    8px -8px,
+    -8px 0;
 }
 
-.gradient-text-amber {
-  background: linear-gradient(135deg, #fbbf24 0%, #f97316 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Starburst: 1px ink lines radiating at 15deg intervals. */
+.starburst {
+  background-image: repeating-conic-gradient(
+    from 0deg,
+    var(--color-ink) 0deg 0.35deg,
+    transparent 0.35deg 15deg
+  );
+  border-radius: 9999px;
 }
