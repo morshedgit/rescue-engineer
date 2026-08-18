@@ -1,77 +1,85 @@
 ---
 const currentYear = new Date().getFullYear();
+
+const navLinks = [
+  { href: '#the-wall', label: 'The Vibe Coding Wall' },
+  { href: '#how-it-works', label: '3-Step Rescue Process' },
+  { href: '#code-teardown', label: 'Architecture Teardown' },
+  { href: '#pricing', label: 'Services & Pricing' },
+  { href: '#tech-stack', label: 'Supported Ecosystem' },
+  { href: '#faq', label: 'Frequently Asked Questions' }
+];
+
+const guarantees = [
+  '48-Hour Diagnostic Report',
+  '100% Audit Refund Guarantee',
+  'Strict Bilateral NDA Protection',
+  '100% IP & Repository Ownership'
+];
 ---
 
-<footer class="border-t border-slate-800/80 bg-[#05080f] py-14 text-slate-400 text-xs sm:text-sm">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-    
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      
-      <!-- Brand & Mission Column -->
-      <div class="space-y-3 md:col-span-2">
+<footer class="bg-signal text-cream">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+      <div class="md:col-span-2">
         <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-500 to-indigo-600 p-0.5 shadow-md shadow-sky-500/20">
-            <div class="w-full h-full bg-[#090d16] rounded-[6px] flex items-center justify-center">
-              <svg class="w-4 h-4 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-              </svg>
-            </div>
-          </div>
-          <span class="text-base font-bold text-white tracking-tight">Vibe Code Rescue</span>
+          <svg class="w-8 h-8" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="0" y="0" width="15" height="15" fill="currentColor" />
+            <circle cx="24.5" cy="7.5" r="7.5" fill="currentColor" opacity="0.55" />
+            <path d="M0 32 L7.5 17 L15 32 Z" fill="currentColor" opacity="0.55" />
+            <rect x="17" y="17" width="15" height="15" fill="currentColor" />
+          </svg>
+          <span class="font-display text-sub">Vibe Code Rescue</span>
         </div>
-        <p class="text-xs text-slate-300 leading-relaxed max-w-md">
-          Independent Fractional Senior Engineering consultancy bridging the gap between rapid AI prototyping (Cursor, Lovable, Bolt, Replit) and production-grade reliability, security, and scalability.
+
+        <p class="mt-6 text-body max-w-[480px]">
+          Independent Fractional Senior Engineering consultancy bridging the gap between rapid AI
+          prototyping (Cursor, Lovable, Bolt, Replit) and production-grade reliability, security,
+          and scalability.
         </p>
-        <div class="flex items-center gap-3 text-xs text-emerald-400 pt-1">
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span>Zero Junior Contractors • Principal Software Architect Direct</span>
+
+        <p class="mt-6 text-small font-bold">
+          Zero Junior Contractors • Principal Software Architect Direct
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-[13px] font-bold uppercase tracking-widest mb-5">Navigation</h3>
+        <ul class="space-y-3">
+          {navLinks.map((l) => (
+            <li>
+              <a href={l.href} class="text-small hover:underline underline-offset-4">{l.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-[13px] font-bold uppercase tracking-widest mb-5">Guarantees &amp; Security</h3>
+        <ul class="space-y-3">
+          {guarantees.map((g) => (
+            <li class="flex items-start gap-3 text-small">
+              <span class="w-2 h-2 mt-2 shrink-0 bg-cream" aria-hidden="true"></span>
+              <span>{g}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-6">
+          <a href="#triage" class="pill border-cream text-cream hover:bg-cream hover:text-signal">
+            Book Code Triage
+          </a>
         </div>
-      </div>
-
-      <!-- Quick Navigation -->
-      <div class="space-y-3">
-        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200">Navigation</h4>
-        <ul class="space-y-2 text-xs">
-          <li><a href="#the-wall" class="hover:text-sky-400 transition-colors">The Vibe Coding Wall</a></li>
-          <li><a href="#how-it-works" class="hover:text-sky-400 transition-colors">3-Step Rescue Process</a></li>
-          <li><a href="#code-teardown" class="hover:text-sky-400 transition-colors">Architecture Teardown</a></li>
-          <li><a href="#pricing" class="hover:text-sky-400 transition-colors">Services & Pricing</a></li>
-          <li><a href="#tech-stack" class="hover:text-sky-400 transition-colors">Supported Ecosystem</a></li>
-          <li><a href="#faq" class="hover:text-sky-400 transition-colors">Frequently Asked Questions</a></li>
-        </ul>
-      </div>
-
-      <!-- Services & Guarantee -->
-      <div class="space-y-3">
-        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200">Guarantees & Security</h4>
-        <ul class="space-y-2 text-xs">
-          <li class="flex items-center gap-1.5 text-slate-300">
-            <span class="text-emerald-400">✓</span> 48-Hour Diagnostic Report
-          </li>
-          <li class="flex items-center gap-1.5 text-slate-300">
-            <span class="text-emerald-400">✓</span> 100% Audit Refund Guarantee
-          </li>
-          <li class="flex items-center gap-1.5 text-slate-300">
-            <span class="text-emerald-400">✓</span> Strict Bilateral NDA Protection
-          </li>
-          <li class="flex items-center gap-1.5 text-slate-300">
-            <span class="text-emerald-400">✓</span> 100% IP & Repository Ownership
-          </li>
-          <li class="pt-2">
-            <a href="#triage" class="inline-flex items-center gap-1 text-sky-400 hover:text-sky-300 font-semibold">
-              Book Code Triage Call &rarr;
-            </a>
-          </li>
-        </ul>
       </div>
 
     </div>
 
-    <!-- Legal & Copyright -->
-    <div class="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-300">
+    <div class="mt-16 pt-8 border-t border-cream/40 flex flex-col sm:flex-row items-start justify-between gap-4 text-[13px]">
       <p>&copy; {currentYear} Vibe Code Rescue. All rights reserved.</p>
-      <p class="text-center sm:text-right text-[11px] max-w-md">
-        Disclaimer: Independent engineering service. Not officially affiliated with or endorsed by Cursor (Anysphere), Lovable, Bolt.new (StackBlitz), Replit, or Vercel.
+      <p class="sm:text-right max-w-md">
+        Disclaimer: Independent engineering service. Not officially affiliated with or endorsed by
+        Cursor (Anysphere), Lovable, Bolt.new (StackBlitz), Replit, or Vercel.
       </p>
     </div>
 

@@ -12,7 +12,7 @@ const steps = [
       '30-minute 1-on-1 video walkthrough call'
     ],
     timeframe: 'Turnaround: 48 Hours',
-    badgeColor: 'text-sky-400 border-sky-500/20 bg-sky-500/10'
+    accent: 'bg-ember'
   },
   {
     step: '02',
@@ -26,7 +26,7 @@ const steps = [
       'Automated CI/CD build tests preventing regressions'
     ],
     timeframe: 'Duration: 1–2 Weeks',
-    badgeColor: 'text-indigo-400 border-indigo-500/20 bg-indigo-500/10'
+    accent: 'bg-saffron'
   },
   {
     step: '03',
@@ -40,95 +40,63 @@ const steps = [
       '14 days of post-rescue monitoring & support'
     ],
     timeframe: 'Outcome: Launch Ready',
-    badgeColor: 'text-emerald-400 border-emerald-500/20 bg-emerald-500/10'
+    accent: 'bg-signal'
   }
 ];
 ---
 
-<section id="how-it-works" class="py-20 lg:py-28 relative border-t border-slate-800/80 bg-[#060911]">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    <!-- Section Header -->
-    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold uppercase tracking-wider">
+<section id="how-it-works" class="border-b border-ink">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+
+    <div class="max-w-[640px] mb-16">
+      <p class="text-small font-bold uppercase tracking-widest text-signal mb-5">
         The Rescue Process
-      </div>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-        From Breaking Prototype to <span class="gradient-text-accent">Production in 3 Steps.</span>
+      </p>
+      <h2 class="text-[2.25rem] sm:text-[2.75rem] lg:text-section text-ink">
+        From Breaking Prototype to <span class="text-signal">Production in 3 Steps.</span>
       </h2>
-      <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
-        No endless agency meetings or junior delegates. You work directly with a senior software architect with a transparent, sprint-based approach.
+      <p class="mt-6 text-body text-ink max-w-[480px]">
+        No endless agency meetings or junior delegates. You work directly with a senior software
+        architect with a transparent, sprint-based approach.
       </p>
     </div>
 
-    <!-- 3 Step Cards -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
-      
-      {steps.map((item) => (
-        <div class="glass-panel glass-panel-hover rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative group border-t-2 border-t-slate-700/60 hover:border-t-sky-400 transition-all duration-300">
-          
-          <div class="space-y-5">
-            <!-- Step Header -->
-            <div class="flex items-center justify-between">
-              <span class="text-4xl font-extrabold font-mono text-slate-700 group-hover:text-sky-500/50 transition-colors">
-                {item.step}
-              </span>
-              <span class={`text-xs font-semibold px-2.5 py-1 rounded-full border ${item.badgeColor}`}>
-                {item.timeframe}
-              </span>
-            </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 border-t border-l border-ink">
+      {steps.map((s) => (
+        <div class="border-r border-b border-ink p-6 sm:p-8 flex flex-col">
+          <div class="flex items-center gap-4 mb-6">
+            <span class={`w-12 h-12 shrink-0 ${s.accent}`} aria-hidden="true"></span>
+            <span class="font-display text-[2.5rem] leading-none text-ink">{s.step}</span>
+          </div>
 
-            <!-- Title & Tagline -->
-            <div>
-              <span class="text-xs font-semibold uppercase tracking-wider text-sky-400 block">{item.tagline}</span>
-              <h3 class="text-2xl font-bold text-white mt-1 group-hover:text-sky-300 transition-colors">
-                {item.title}
-              </h3>
-            </div>
+          <p class="font-mono text-[13px] text-ink/60">{s.tagline}</p>
+          <h3 class="text-sub text-ink mt-2">{s.title}</h3>
 
-            <p class="text-sm text-slate-300 leading-relaxed">
-              {item.description}
+          <p class="mt-4 text-body text-ink">{s.description}</p>
+
+          <div class="mt-6 pt-5 border-t border-ink flex-1">
+            <p class="text-[13px] font-bold uppercase tracking-widest text-ink/60 mb-3">
+              You Receive:
             </p>
-
-            <!-- Deliverables Checklist -->
-            <div class="pt-4 border-t border-slate-800/80 space-y-2.5">
-              <p class="text-xs font-semibold uppercase tracking-wider text-slate-300">What You Get:</p>
-              <ul class="space-y-2">
-                {item.deliverables.map((deliv) => (
-                  <li class="text-xs sm:text-sm text-slate-300 flex items-start gap-2.5">
-                    <svg class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>{deliv}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
+            <ul class="space-y-2">
+              {s.deliverables.map((d) => (
+                <li class="flex items-start gap-3 text-small">
+                  <span class="w-2 h-2 mt-2 shrink-0 bg-ink" aria-hidden="true"></span>
+                  <span>{d}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <!-- Bottom micro-footer -->
-          <div class="mt-8 pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-400">
-            <span>Direct engineer oversight</span>
-            <span class="text-emerald-400 font-medium">✓ Guaranteed turnaround</span>
-          </div>
-
+          <p class="mt-6 pt-4 border-t border-ink font-mono text-[13px] font-bold text-signal">
+            {s.timeframe}
+          </p>
         </div>
       ))}
-
     </div>
 
-    <!-- Bottom CTA Bar -->
-    <div class="mt-14 text-center">
-      <a 
-        href="#triage" 
-        class="inline-flex items-center gap-2 px-8 py-3.5 text-sm font-bold text-white rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 transition-all duration-200"
-      >
-        Start with Step 1: Book Free 15-Min Triage
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </a>
+    <div class="mt-14">
+      <a href="#triage" class="pill pill-signal">Start with Step 1: Book Free 15-Min Triage</a>
     </div>
 
   </div>

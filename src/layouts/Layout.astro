@@ -39,10 +39,12 @@ const {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts
+         Archivo (width axis) substitutes degular-display; Instrument Sans
+         substitutes usual. Both originals are commercially licensed. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
     <!-- JSON-LD Structured Data for Service -->
     <script type="application/ld+json">
@@ -69,7 +71,7 @@ const {
       }
     </script>
   </head>
-  <body class="bg-[#060911] text-slate-100 antialiased selection:bg-sky-500/30 selection:text-white">
+  <body class="bg-cream text-ink antialiased">
     <div class="relative min-h-screen flex flex-col justify-between">
       <slot />
     </div>

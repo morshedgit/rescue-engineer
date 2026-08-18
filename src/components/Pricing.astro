@@ -17,8 +17,7 @@ const packages = [
     ],
     ctaText: 'Book 48-Hr Audit',
     ctaLink: '#triage',
-    popular: false,
-    cardBorder: 'border-slate-800'
+    popular: false
   },
   {
     id: 'pkg-sprint',
@@ -38,8 +37,7 @@ const packages = [
     ],
     ctaText: 'Start Rescue Sprint',
     ctaLink: '#triage',
-    popular: true,
-    cardBorder: 'border-sky-500/50 shadow-sky-500/10'
+    popular: true
   },
   {
     id: 'pkg-advisory',
@@ -58,115 +56,75 @@ const packages = [
     ],
     ctaText: 'Inquire About Advisory',
     ctaLink: '#triage',
-    popular: false,
-    cardBorder: 'border-slate-800'
+    popular: false
   }
 ];
 ---
 
-<section id="pricing" class="py-20 lg:py-28 relative border-t border-slate-800/80 bg-[#060911]">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    <!-- Section Header -->
-    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider">
+<section id="pricing" class="border-b border-ink">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+
+    <div class="max-w-[640px] mb-16">
+      <p class="text-small font-bold uppercase tracking-widest text-signal mb-5">
         Transparent Pricing
-      </div>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-        Fixed Scope. Transparent Pricing. <br class="hidden sm:inline" />
-        <span class="gradient-text-accent">Zero Hidden Retainers.</span>
+      </p>
+      <h2 class="text-[2.25rem] sm:text-[2.75rem] lg:text-section text-ink">
+        Fixed Scope. Transparent Pricing. <span class="text-signal">Zero Hidden Retainers.</span>
       </h2>
-      <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
-        Choose between an actionable 48-hour diagnostic, a full hands-on rescue sprint, or fractional senior advisory as you scale.
+      <p class="mt-6 text-body text-ink max-w-[480px]">
+        Choose between an actionable 48-hour diagnostic, a full hands-on rescue sprint, or fractional
+        senior advisory as you scale.
       </p>
     </div>
 
-    <!-- Pricing 3-Card Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-      
+    <div class="grid grid-cols-1 lg:grid-cols-3 border-t border-l border-ink">
       {packages.map((pkg) => (
-        <div class={`glass-panel rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative group ${pkg.cardBorder} ${pkg.popular ? 'bg-slate-900/90 shadow-2xl scale-100 lg:scale-[1.03] z-10' : 'bg-[#090d16]/80'}`}>
-          
-          <!-- Popular Ribbon Badge -->
-          {pkg.popular && (
-            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-sky-500 to-indigo-600 text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-sky-500/30">
-              {pkg.badge}
-            </div>
-          )}
+        <div class={`border-r border-b border-ink p-6 sm:p-8 flex flex-col ${pkg.popular ? 'bg-signal text-cream' : ''}`}>
 
-          <div class="space-y-6">
-            
-            <!-- Package Header -->
-            <div class="space-y-2">
-              {!pkg.popular && (
-                <span class="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700 inline-block">
-                  {pkg.badge}
-                </span>
-              )}
-              <h3 class="text-2xl font-bold text-white mt-1">
-                {pkg.name}
-              </h3>
-              <p class="text-xs text-slate-300 leading-relaxed">
-                {pkg.description}
-              </p>
-            </div>
+          <span class={`inline-block self-start px-2.5 py-1 text-[13px] font-bold border ${pkg.popular ? 'border-cream' : 'border-ink'}`}>
+            {pkg.badge}
+          </span>
 
-            <!-- Price Display -->
-            <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80">
-              <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono tracking-tight">
-                {pkg.price}
-              </div>
-              <div class="text-xs font-medium text-slate-400 mt-1">
-                {pkg.frequency}
-              </div>
-            </div>
+          <h3 class={`text-sub mt-5 ${pkg.popular ? 'text-cream' : 'text-ink'}`}>{pkg.name}</h3>
+          <p class="mt-3 text-small">{pkg.description}</p>
 
-            <!-- Deliverables List -->
-            <div class="space-y-3 pt-2">
-              <p class="text-xs font-semibold uppercase tracking-wider text-slate-300">Included Deliverables:</p>
-              <ul class="space-y-2.5">
-                {pkg.deliverables.map((item) => (
-                  <li class="text-xs sm:text-sm text-slate-300 flex items-start gap-2.5">
-                    <svg class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
+          <div class={`mt-6 pt-6 border-t ${pkg.popular ? 'border-cream/40' : 'border-ink'}`}>
+            <div class="font-display text-[2.5rem] leading-none">{pkg.price}</div>
+            <div class="mt-2 font-mono text-[13px]">{pkg.frequency}</div>
           </div>
 
-          <!-- Bottom Action Button -->
-          <div class="mt-8 pt-6 border-t border-slate-800">
-            <a 
-              href={pkg.ctaLink} 
-              class={`w-full inline-flex items-center justify-center px-6 py-3.5 text-sm font-bold rounded-xl transition-all duration-200 ${
-                pkg.popular 
-                  ? 'bg-gradient-to-r from-sky-500 to-indigo-600 text-white hover:from-sky-400 hover:to-indigo-500 shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40' 
-                  : 'bg-slate-800 hover:bg-slate-700 text-white border border-slate-700'
-              }`}
+          <div class={`mt-6 pt-6 border-t flex-1 ${pkg.popular ? 'border-cream/40' : 'border-ink'}`}>
+            <p class="text-[13px] font-bold uppercase tracking-widest mb-3 opacity-70">
+              Included Deliverables:
+            </p>
+            <ul class="space-y-2">
+              {pkg.deliverables.map((item) => (
+                <li class="flex items-start gap-3 text-small">
+                  <span
+                    class={`w-2 h-2 mt-2 shrink-0 ${pkg.popular ? 'bg-cream' : 'bg-ink'}`}
+                    aria-hidden="true"
+                  ></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="mt-8">
+            <a
+              href={pkg.ctaLink}
+              class={`pill w-full ${pkg.popular ? 'border-cream text-cream hover:bg-cream hover:text-signal' : ''}`}
             >
               {pkg.ctaText}
-              <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
             </a>
           </div>
-
         </div>
       ))}
-
     </div>
 
-    <!-- Pricing Guarantee Note -->
-    <div class="mt-12 text-center text-xs sm:text-sm text-slate-300 flex items-center justify-center gap-2">
-      <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-      </svg>
-      <span>Custom scopes and emergency launch timelines available on request during triage.</span>
-    </div>
+    <p class="mt-10 text-small text-ink">
+      Custom scopes and emergency launch timelines available on request during triage.
+    </p>
 
   </div>
 </section>

@@ -4,103 +4,91 @@ const stackCategories = [
     category: 'AI Prototyping Ecosystem',
     description: 'Tools where prototypes originate and where prompt history starts stalling.',
     items: [
-      { name: 'Cursor AI', tag: 'IDE & Agent', icon: '⚡' },
-      { name: 'Lovable.dev', tag: 'Full-Stack Web', icon: '❤️' },
-      { name: 'Bolt.new', tag: 'Browser StackBlitz', icon: '⚡' },
-      { name: 'Replit Agent', tag: 'Cloud Workspace', icon: '🌀' },
-      { name: 'v0 by Vercel', tag: 'Generative UI', icon: '▲' },
-      { name: 'Claude Code', tag: 'CLI & Multi-file', icon: '✳️' }
+      { name: 'Cursor AI', tag: 'IDE & Agent' },
+      { name: 'Lovable.dev', tag: 'Full-Stack Web' },
+      { name: 'Bolt.new', tag: 'Browser StackBlitz' },
+      { name: 'Replit Agent', tag: 'Cloud Workspace' },
+      { name: 'v0 by Vercel', tag: 'Generative UI' },
+      { name: 'Claude Code', tag: 'CLI & Multi-file' }
     ]
   },
   {
     category: 'Frontend & Frameworks',
     description: 'Modern, reactive frameworks requiring clean state management and build hygiene.',
     items: [
-      { name: 'Next.js 14 / 15', tag: 'App Router / SSR', icon: '▲' },
-      { name: 'React 18 / 19', tag: 'Server Components', icon: '⚛️' },
-      { name: 'TypeScript', tag: 'Strict Type-Safety', icon: '🔷' },
-      { name: 'Tailwind CSS', tag: 'UI Architecture', icon: '🌊' },
-      { name: 'Astro', tag: 'Content & Edge', icon: '🚀' },
-      { name: 'Vite', tag: 'Fast Bundling', icon: '⚡' }
+      { name: 'Next.js 14 / 15', tag: 'App Router / SSR' },
+      { name: 'React 18 / 19', tag: 'Server Components' },
+      { name: 'TypeScript', tag: 'Strict Type-Safety' },
+      { name: 'Tailwind CSS', tag: 'UI Architecture' },
+      { name: 'Astro', tag: 'Content & Edge' },
+      { name: 'Vite', tag: 'Fast Bundling' }
     ]
   },
   {
     category: 'Databases & Backend Infrastructure',
     description: 'Data layers requiring zero-trust security policies, migrations, and indexing.',
     items: [
-      { name: 'Supabase', tag: 'PostgreSQL + RLS', icon: '⚡' },
-      { name: 'PostgreSQL', tag: 'Relational DB', icon: '🐘' },
-      { name: 'Firebase / Firestore', tag: 'NoSQL & Security Rules', icon: '🔥' },
-      { name: 'Prisma / Drizzle ORM', tag: 'Type-safe Queries', icon: '💎' },
-      { name: 'Node.js / Express', tag: 'REST & GraphQL', icon: '🟢' },
-      { name: 'Python / FastAPI', tag: 'AI & Data Services', icon: '🐍' }
+      { name: 'Supabase', tag: 'PostgreSQL + RLS' },
+      { name: 'PostgreSQL', tag: 'Relational DB' },
+      { name: 'Firebase / Firestore', tag: 'NoSQL & Security Rules' },
+      { name: 'Prisma / Drizzle ORM', tag: 'Type-safe Queries' },
+      { name: 'Node.js / Express', tag: 'REST & GraphQL' },
+      { name: 'Python / FastAPI', tag: 'AI & Data Services' }
     ]
   },
   {
     category: 'Payments, Auth & Cloud Hosting',
     description: 'Critical infrastructure where customer money and authentication flow.',
     items: [
-      { name: 'Stripe', tag: 'Billing & Webhooks', icon: '💳' },
-      { name: 'Clerk / Auth0', tag: 'Session Security', icon: '🔒' },
-      { name: 'Cloudflare Pages & Workers', tag: 'Global Edge CDN', icon: '☁️' },
-      { name: 'Vercel', tag: 'Edge Functions', icon: '▲' },
-      { name: 'AWS (S3, Lambda, RDS)', tag: 'Cloud Scalability', icon: '☁️' },
-      { name: 'Upstash Redis', tag: 'Rate Limiting & Queue', icon: '🔴' }
+      { name: 'Stripe', tag: 'Billing & Webhooks' },
+      { name: 'Clerk / Auth0', tag: 'Session Security' },
+      { name: 'Cloudflare Pages & Workers', tag: 'Global Edge CDN' },
+      { name: 'Vercel', tag: 'Edge Functions' },
+      { name: 'AWS (S3, Lambda, RDS)', tag: 'Cloud Scalability' },
+      { name: 'Upstash Redis', tag: 'Rate Limiting & Queue' }
     ]
   }
 ];
 ---
 
-<section id="tech-stack" class="py-20 lg:py-28 relative border-t border-slate-800/80 bg-[#070b14]">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    <!-- Section Header -->
-    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold uppercase tracking-wider">
+<section id="tech-stack" class="border-b border-ink">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+
+    <div class="max-w-[640px] mb-16">
+      <p class="text-small font-bold uppercase tracking-widest text-signal mb-5">
         Supported Ecosystem
-      </div>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-        Built for the Modern <span class="gradient-text-accent">AI & Full-Stack Landscape.</span>
+      </p>
+      <h2 class="text-[2.25rem] sm:text-[2.75rem] lg:text-section text-ink">
+        Built for the Modern <span class="text-signal">AI &amp; Full-Stack Landscape.</span>
       </h2>
-      <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
-        Whether your app was built in 2 hours with Lovable or engineered with Cursor + Supabase, we support the full modern tech stack.
+      <p class="mt-6 text-body text-ink max-w-[480px]">
+        Whether your app was built in 2 hours with Lovable or engineered with Cursor + Supabase, we
+        support the full modern tech stack.
       </p>
     </div>
 
-    <!-- Tech Grid by Category -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 border-t border-l border-ink">
       {stackCategories.map((cat) => (
-        <div class="glass-panel rounded-2xl p-6 sm:p-8 space-y-6 border border-slate-800 hover:border-slate-700/80 transition-colors">
-          <div>
-            <h3 class="text-xl font-bold text-white flex items-center gap-2">
-              <span>{cat.category}</span>
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1">
-              {cat.description}
-            </p>
-          </div>
+        <div class="border-r border-b border-ink p-6 sm:p-8">
+          <h3 class="text-sub text-ink">{cat.category}</h3>
+          <p class="mt-2 text-small text-ink/70">{cat.description}</p>
 
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-6">
             {cat.items.map((item) => (
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-sky-500/30 hover:bg-slate-800/60 transition-all group">
-                <div class="flex items-center gap-2">
-                  <span class="text-base group-hover:scale-110 transition-transform">{item.icon}</span>
-                  <span class="text-xs font-bold text-white group-hover:text-sky-300 transition-colors">{item.name}</span>
-                </div>
-                <div class="text-[11px] text-slate-300 font-mono mt-1">
-                  {item.tag}
-                </div>
-              </div>
+              <li class="py-2.5 border-t border-ink/20">
+                <span class="block text-small font-bold text-ink">{item.name}</span>
+                <span class="block font-mono text-[13px] text-ink/60">{item.tag}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       ))}
     </div>
 
-    <!-- Custom Stack Callout -->
-    <div class="mt-12 text-center text-xs sm:text-sm text-slate-300">
-      Using an unlisted technology, custom Python AI service, or self-hosted server? <a href="#triage" class="text-sky-400 hover:text-sky-300 underline font-medium">Ask during the code triage call</a>.
-    </div>
+    <p class="mt-10 text-body text-ink max-w-[640px]">
+      Using an unlisted technology, custom Python AI service, or self-hosted server?
+      <a href="#triage" class="font-bold text-signal underline underline-offset-4">Ask during the code triage call</a>.
+    </p>
 
   </div>
 </section>
